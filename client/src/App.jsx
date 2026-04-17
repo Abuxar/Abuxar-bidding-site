@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import AuthPage from './pages/AuthPage';
 import AuctionDetail from './pages/AuctionDetail';
 import AdminDashboard from './pages/AdminDashboard';
+import TopBar from './components/TopBar';
+import Footer from './components/Footer';
 
 const queryClient = new QueryClient();
 
@@ -74,6 +76,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <div className="min-h-screen flex flex-col font-sans bg-brand-dark bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]">
+          <TopBar />
           <Navigation />
           <main className="flex-grow container mx-auto px-6 py-8">
             <Routes>
@@ -83,6 +86,7 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </main>
+          <Footer />
         </div>
         
         <Toaster position="top-right" toastOptions={{
