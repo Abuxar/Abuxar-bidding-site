@@ -25,7 +25,7 @@ require('./cron/auctionCron')();
 app.use(helmet());
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://abuxar-bidding-site.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
