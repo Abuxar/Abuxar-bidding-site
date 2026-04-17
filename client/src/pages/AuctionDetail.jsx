@@ -61,7 +61,7 @@ const AuctionDetail = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-fade-in pt-12">
       <div className="glass-card rounded-sm overflow-hidden p-10 flex flex-col md:flex-row gap-12">
-        <div className="md:w-1/2 bg-brand-brown rounded-sm h-96 relative overflow-hidden flex items-center justify-center">
+        <div className="md:w-1/2 bg-brand-brown rounded-sm h-96 lg:h-[500px] xl:h-[600px] relative overflow-hidden flex items-center justify-center flex-shrink-0">
           {auction.images && auction.images.length > 0 ? (
              <img src={auction.images[0]} alt="Lot" className="w-full h-full object-cover border border-brand-primary/20 opacity-80 hover:opacity-100 transition-opacity" />
           ) : (

@@ -40,8 +40,8 @@ const Home = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {auctions.map((auction) => (
-            <div key={auction._id} onClick={() => navigate(`/auction/${auction._id}`)} className="glass-card rounded-sm overflow-hidden group cursor-pointer transition-all duration-700 transform hover:-translate-y-2">
-              <div className="h-64 bg-brand-brown relative overflow-hidden flex items-center justify-center">
+            <div key={auction._id} onClick={() => navigate(`/auction/${auction._id}`)} className="glass-card flex flex-col rounded-sm overflow-hidden group cursor-pointer transition-all duration-700 transform hover:-translate-y-2">
+              <div className="h-80 sm:h-96 bg-brand-brown relative overflow-hidden flex items-center justify-center flex-shrink-0">
                 {auction.images && auction.images.length > 0 ? (
                   <img src={auction.images[0]} alt={auction.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 origin-center opacity-80" />
                 ) : (
@@ -50,9 +50,9 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-card/90 to-transparent z-10"></div>
                 <span className="absolute z-20 font-serif text-3xl text-brand-primary/80 tracking-[0.3em] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-xl drop-shadow-2xl">VIEW</span>
               </div>
-              <div className="p-8 space-y-6 relative z-20">
-                <h3 className="text-2xl font-serif text-brand-accent group-hover:text-brand-primary transition-colors duration-500">{auction.title}</h3>
-                <div className="flex justify-between items-end border-t border-brand-primary/20 pt-5 mt-2">
+              <div className="p-8 flex flex-col flex-grow justify-between relative z-20 space-y-6">
+                <h3 className="text-2xl font-serif text-brand-accent group-hover:text-brand-primary transition-colors duration-500 leading-snug">{auction.title}</h3>
+                <div className="flex justify-between items-end border-t border-brand-primary/20 pt-5 mt-auto">
                   <div className="flex flex-col">
                     <span className="text-brand-accent/50 text-xs tracking-[0.2em] uppercase mb-1">Current Bid</span>
                     <span className="text-brand-primary font-medium text-2xl tracking-wide">${auction.currentPrice.toLocaleString()}</span>
