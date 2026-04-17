@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: prestige-auctions-backend
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # User must define MONGO_URI, JWT_SECRET, REDIS_URI manually in Render UI

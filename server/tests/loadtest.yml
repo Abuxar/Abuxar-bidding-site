@@ -1,0 +1,23 @@
+config:
+  target: 'http://localhost:5000'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: 'Ramp up load'
+  engines:
+    socketio-v3: {}
+
+scenarios:
+  - name: 'Bidder connects and joins auction room'
+    engine: socketio-v3
+    flow:
+      - emit:
+          channel: 'joinAuction'
+          data:
+            auctionId: 'loadtest_mock_auction_id'
+      - think: 5
+      - emit:
+          channel: 'leaveAuction'
+          data:
+            auctionId: 'loadtest_mock_auction_id'
