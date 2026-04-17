@@ -62,9 +62,33 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-serif font-semibold text-brand-primary uppercase tracking-widest border-b border-brand-primary/10 pb-4 mb-6">Master Controls</h2>
             <div className="space-y-4">
                 <p className="text-sm text-brand-accent/70">As the system architect, you possess absolute authority over the auction market and user verification states. Use the master routes to inject bans or approve pending scheduled events manually via terminal.</p>
-                <div className="p-4 bg-brand-brown rounded-sm font-mono text-brand-primary/80 text-xs mt-4">
-                   ~ PUT /api/v1/admin/user/:id/ban <br/>
-                   ~ PUT /api/v1/admin/auction/:id/approve
+                <div className="mt-4 flex flex-col gap-4">
+                   <div className="flex gap-4 p-4 bg-brand-brown rounded-sm items-center">
+                     <input id="banUserId" placeholder="Target User ID" className="bg-brand-dark px-4 py-2 text-xs border border-brand-primary/20 text-brand-primary flex-grow focus:outline-none" />
+                     <button onClick={async () => {
+                        const id = document.getElementById('banUserId').value;
+                        if(!id) return;
+                        try {
+                           const res = await api.put(`/admin/user/${id}/ban`);
+                           alert(`System Alert: ${res.data.message}`);
+                        } catch(e) {
+                           alert(`Error: ${e.response?.data?.message || e.message}`);
+                        }
+                     }} className="btn-primary text-xs tracking-widest uppercase">Toggle Ban</button>
+                   </div>
+                   <div className="flex gap-4 p-4 bg-brand-brown rounded-sm items-center">
+                     <input id="approveAuctionId" placeholder="Target Auction ID" className="bg-brand-dark px-4 py-2 text-xs border border-brand-primary/20 text-brand-primary flex-grow focus:outline-none" />
+                     <button onClick={async () => {
+                        const id = document.getElementById('approveAuctionId').value;
+                        if(!id) return;
+                        try {
+                           const res = await api.put(`/admin/auction/${id}/approve`);
+                           alert(`System Alert: ${res.data.message}`);
+                        } catch(e) {
+                           alert(`Error: ${e.response?.data?.message || e.message}`);
+                        }
+                     }} className="btn-primary text-xs tracking-widest uppercase">Approve</button>
+                   </div>
                 </div>
             </div>
          </div>

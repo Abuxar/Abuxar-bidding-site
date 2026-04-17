@@ -23,6 +23,23 @@ emailQueue.process(async (job) => {
     };
 
     await transporter.sendMail(mailOptions);
+  } else if (type === 'auction_won') {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Congratulations! You won ${data.auctionTitle}`,
+      html: `<p>You successfully secured the auction for $${data.finalPrice}. The seller will contact you shortly.</p>`,
+    };
+
+    await transporter.sendMail(mailOptions);
   }
 });
 
