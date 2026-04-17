@@ -22,6 +22,14 @@ const seed = async () => {
       isVerified: true
     });
 
+    const admin = await User.create({
+      username: 'SystemArchitect',
+      email: 'admin@prestige.com',
+      password: 'adminpassword',
+      role: 'Admin',
+      isVerified: true
+    });
+
     const items = [
       {
         sellerId: seller._id,
