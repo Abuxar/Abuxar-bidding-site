@@ -9,6 +9,7 @@ import api from './api';
 import Home from './pages/Home';
 import AuthPage from './pages/AuthPage';
 import AuctionDetail from './pages/AuctionDetail';
+import AdminDashboard from './pages/AdminDashboard';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,12 @@ const Navigation = () => {
         </a>
         <div className="space-x-8 flex items-center">
           <a href="/" className="text-brand-accent/80 hover:text-brand-primary uppercase tracking-widest text-xs font-semibold transition-colors">Gallery</a>
+          {isAuthenticated && user?.role === 'Admin' && (
+             <a href="/admin" className="text-brand-accent/80 hover:text-brand-primary uppercase tracking-widest text-xs font-semibold transition-colors flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                Command Center
+             </a>
+          )}
           {isAuthenticated ? (
             <div className="flex items-center space-x-6 border-l border-brand-primary/20 pl-6">
               <span className="text-brand-primary font-serif tracking-widest text-sm">
@@ -73,6 +80,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/auction/:id" element={<AuctionDetail />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </main>
         </div>
