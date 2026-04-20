@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import AuthPage from './pages/AuthPage';
 import AuctionDetail from './pages/AuctionDetail';
 import AdminDashboard from './pages/AdminDashboard';
+import Profile from './pages/Profile';
+import CreateAuction from './pages/CreateAuction';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
 
@@ -38,25 +40,33 @@ const Navigation = () => {
         <a href="/" className="text-2xl font-serif font-semibold tracking-widest text-brand-primary uppercase drop-shadow-md cursor-pointer">
           Prestige<span className="text-brand-accent font-light">Auctions</span>
         </a>
-        <div className="space-x-8 flex items-center">
+        <div className="space-x-4 md:space-x-8 flex items-center">
           <a href="/" className="text-brand-accent/80 hover:text-brand-primary uppercase tracking-widest text-xs font-semibold transition-colors">Gallery</a>
+          {isAuthenticated && (user?.role === 'Seller' || user?.role === 'Admin') && (
+             <a href="/create-auction" className="text-brand-primary hover:text-brand-accent uppercase tracking-widest text-xs font-semibold transition-colors border border-brand-primary/30 px-3 py-1 rounded-sm hidden sm:inline-block">
+                Publish
+             </a>
+          )}
           {isAuthenticated && user?.role === 'Admin' && (
-             <a href="/admin" className="text-brand-accent/80 hover:text-brand-primary uppercase tracking-widest text-xs font-semibold transition-colors flex items-center gap-2">
+             <a href="/admin" className="text-brand-accent/80 hover:text-brand-primary uppercase tracking-widest text-xs font-semibold transition-colors items-center gap-2 hidden lg:flex">
                 <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
                 Command Center
              </a>
           )}
           {isAuthenticated ? (
-            <div className="flex items-center space-x-6 border-l border-brand-primary/20 pl-6">
-              <span className="text-brand-primary font-serif tracking-widest text-sm">
-                Welcome, {user?.username}
-              </span>
+            <div className="flex items-center space-x-6 border-l border-brand-primary/20 pl-4 md:pl-6 ml-2 md:ml-4">
+              <a href="/profile" className="text-brand-primary font-serif tracking-widest text-sm hover:text-brand-accent transition-colors flex items-center gap-3">
+                {user?.avatar && <img src={user.avatar} className="w-6 h-6 rounded-full object-cover border border-brand-primary/30 hidden md:block" alt="" />}
+                {user?.username}
+              </a>
               <button onClick={handleLogout} className="text-brand-danger hover:text-red-500 uppercase tracking-widest text-xs font-bold transition-colors">
                 Sign Out
               </button>
             </div>
           ) : (
-            <a href="/auth" className="btn-primary text-xs tracking-widest uppercase">Sign In</a>
+             <div className="border-l border-brand-primary/20 pl-4 md:pl-6 ml-2 md:ml-4">
+               <a href="/auth" className="btn-primary text-xs tracking-widest uppercase">Sign In</a>
+             </div>
           )}
         </div>
       </div>
@@ -84,6 +94,8 @@ function App() {
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/auction/:id" element={<AuctionDetail />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/create-auction" element={<CreateAuction />} />
             </Routes>
           </main>
           <Footer />
